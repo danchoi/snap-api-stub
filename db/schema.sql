@@ -2,6 +2,6 @@
 
 create table notes (
   note_id serial primary key,
-  title varchar,
+  title varchar not null,
   created timestamp with time zone default now()
 );

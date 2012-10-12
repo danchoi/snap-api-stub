@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings, ScopedTypeVariables #-}
 
 ------------------------------------------------------------------------------
 -- | This module is where all the routes and handlers are defined for your
@@ -26,7 +26,8 @@ import Snap.Snaplet.Auth.Backends.PostgresqlSimple
 ------------------------------------------------------------------------------
 import           Application
 
--- import Types
+import Types
+import Data.Aeson
 
 
 ------------------------------------------------------------------------------
@@ -63,11 +64,19 @@ handleNewUser = method GET handleForm <|> method POST handleFormSubmit
 
 
 ------------------------------------------------------------------------------
+handleNotesResource :: Handler App App ()
+handleNotesResource = do
+  notes :: [Note] <- with db $ query_ "select note_id, title, created from notes"
+  writeLBS $ encode $ toJSON notes
+  
+
+------------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
 routes = [ ("/login",    with auth handleLoginSubmit)
          , ("/logout",   with auth handleLogout)
          , ("/new_user", with auth handleNewUser)
+         , ("/notes",    handleNotesResource)
          , ("",          serveDirectory "static")
          ]
 
