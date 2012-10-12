@@ -66,9 +66,9 @@ handleNewUser = method GET handleForm <|> method POST handleFormSubmit
 ------------------------------------------------------------------------------
 handleNotesResource :: Handler App App ()
 handleNotesResource = do
-  notes :: [Note] <- with db $ query_ "select note_id, title, created from notes"
-  modifyResponse $ setContentType "application/json"
-  writeLBS $ encode $ toJSON notes
+    notes :: [Note] <- with db $ query_ "select note_id, title, created from notes"
+    modifyResponse $ setContentType "application/json"
+    writeLBS $ encode $ toJSON notes
   
 
 ------------------------------------------------------------------------------
