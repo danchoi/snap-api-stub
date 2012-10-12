@@ -80,7 +80,7 @@ app = makeSnaplet "app" "An snaplet example application." Nothing $ do
     -- doesn't require any kind of database server to run.  In practice,
     -- you'll probably want to change this to a more robust auth backend.
     a <- nestSnaplet "auth" auth $
-           initJsonFileAuthManager defAuthSettings sess "users.json"
+           initJsonFileAuthManager defAuthSettings sess "users.api"
     addRoutes routes
     addAuthSplices auth
     return $ App h s a
