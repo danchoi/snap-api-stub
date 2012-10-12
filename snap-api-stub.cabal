@@ -33,7 +33,9 @@ Executable snap-api-stub
     text >= 0.11 && < 0.12,
     time >= 1.1 && < 1.5,
     xmlhtml >= 0.1,
-    snaplet-postgresql-simple
+    snaplet-postgresql-simple,
+    aeson >= 0.3.2.6,
+    ghc-prim
 
   if flag(development)
     build-depends:

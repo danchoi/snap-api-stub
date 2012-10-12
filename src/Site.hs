@@ -26,6 +26,8 @@ import Snap.Snaplet.Auth.Backends.PostgresqlSimple
 ------------------------------------------------------------------------------
 import           Application
 
+-- import Types
+
 
 ------------------------------------------------------------------------------
 -- | Render login form
